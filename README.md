@@ -1,0 +1,1 @@
+# Vertical_Slice_Architecture
