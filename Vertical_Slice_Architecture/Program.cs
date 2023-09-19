@@ -1,6 +1,3 @@
-using Carter;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using Vertical_Slice_Architecture.Database;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,11 +15,11 @@ var assembly = typeof(Program).Assembly;
 // Register MediatR
 builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
 
-// Register FluentValidation
-builder.Services.AddValidatorsFromAssembly(assembly);
-
 // Register Carter
 builder.Services.AddCarter();
+
+// Register FluentValidation
+builder.Services.AddValidatorsFromAssembly(assembly);
 
 // app
 var app = builder.Build();
@@ -35,5 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapCarter();
+
+//CreateArticle.MapEndpoint(app);
 app.UseHttpsRedirection();
 app.Run();

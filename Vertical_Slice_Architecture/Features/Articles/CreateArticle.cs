@@ -1,7 +1,4 @@
-﻿using Carter;
-using FluentValidation;
-using MediatR;
-using Vertical_Slice_Architecture.Database;
+﻿using Vertical_Slice_Architecture.Database;
 using Vertical_Slice_Architecture.Entities;
 using Vertical_Slice_Architecture.Shared;
 
@@ -42,7 +39,7 @@ public static class CreateArticle
             var validation = _validator.Validate(request);
             if (!validation.IsValid)
             {
-                return Result.Fail<Guid>(validation.ToString());
+                return Result.Failure<Guid>(new Error("CreateArticle.Validation", validation.ToString()));
             }
 
             var article = new Article
@@ -58,7 +55,7 @@ public static class CreateArticle
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok(article.Id);
+            return Result.Success(article.Id);
         }
     }
 
@@ -66,7 +63,7 @@ public static class CreateArticle
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("api/article", async (Command command, ISender sender) =>
+            app.MapPost("api/articles", async (Command command, ISender sender) =>
             {
                 var result = await sender.Send(command);
 
@@ -76,7 +73,23 @@ public static class CreateArticle
                 }
 
                 return Results.Ok(result.Value);
-            });
+            }).WithTags("Todos"); ;
         }
     }
+
+    //public static void MapEndpoint(this IEndpointRouteBuilder app)
+    //{
+    //    app.MapPost("api/article", async (Command command, ISender sender) =>
+    //    {
+    //        var result = await sender.Send(command);
+
+    //        if (result.IsFailure)
+    //        {
+    //            return Results.BadRequest(result.Error);
+    //        }
+
+
+    //        return Results.Ok(result.Value);
+    //    });
+    //}
 }
