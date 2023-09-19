@@ -1,11 +1,28 @@
-﻿namespace Vertical_Slice_Architecture.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-public class Article
+namespace Entities;
+
+public partial class Article
 {
+    [Key]
     public Guid Id { get; set; }
-    public string Title { get; set; } = string.Empty;
-    public string Content { get; set; } = string.Empty;
-    public string Tags { get; set; } = string.Empty;
-    public DateTime CreateOnUtc { get; set; }
+
+    [StringLength(100)]
+    public string Title { get; set; } = null!;
+
+    [StringLength(100)]
+    public string Content { get; set; } = null!;
+
+    [StringLength(100)]
+    public string? Tags { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? CreateOnUtc { get; set; }
+
+    [Column(TypeName = "datetime")]
     public DateTime? PublishedOnUtc { get; set; }
 }

@@ -1,6 +1,4 @@
-﻿using Vertical_Slice_Architecture.Database;
-using Vertical_Slice_Architecture.Entities;
-using Vertical_Slice_Architecture.Shared;
+﻿using Vertical_Slice_Architecture.Shared;
 using static Vertical_Slice_Architecture.Features.Articles.CreateArticle;
 
 namespace Vertical_Slice_Architecture.Features.Articles;
@@ -25,10 +23,10 @@ public static class CreateArticle
 
     internal sealed class Handler : IRequestHandler<Command, Result<Guid>>
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly SqlContext _dbContext;
         private readonly IValidator<Command> _validator;
 
-        public Handler(ApplicationDbContext dbContext, IValidator<Command> validator)
+        public Handler(SqlContext dbContext, IValidator<Command> validator)
         {
             _dbContext = dbContext;
             _validator = validator;
