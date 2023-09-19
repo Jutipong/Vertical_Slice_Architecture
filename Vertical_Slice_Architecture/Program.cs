@@ -1,3 +1,5 @@
+using Carter;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Vertical_Slice_Architecture.Database;
 using Vertical_Slice_Architecture.Features.Articles;
@@ -12,10 +14,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(o =>
 o.UseSqlServer(builder.Configuration.GetConnectionString(builder.Configuration.GetConnectionString("SqlServer")!)));
 
-// Register MediatR
-builder.Services.AddMediatR(config =>
-    config.RegisterServicesFromAssembly(typeof(Program).Assembly));
+var assembly = typeof(Program).Assembly;
 
+// Register MediatR
+builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
+
+// Register FluentValidation
+builder.Services.AddValidatorsFromAssembly(assembly);
+
+// Register Carter
+builder.Services.AddCarter();
+
+// app
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

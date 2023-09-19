@@ -1,29 +1,49 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Vertical_Slice_Architecture.Database;
 using Vertical_Slice_Architecture.Entities;
+using Vertical_Slice_Architecture.Shared;
 
 namespace Vertical_Slice_Architecture.Features.Articles;
 
 public static class CreateArticle
 {
-    public class Command : IRequest<Guid>
+    public class Command : IRequest<Result<Guid>>
     {
         public string Title { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
-        public List<string> Tags { get; set; } = new();
+        public string Tags { get; set; } = string.Empty;
     }
 
-    internal sealed class Handler : IRequestHandler<Command, Guid>
+    public class Validator : AbstractValidator<Command>
+    {
+        public Validator()
+        {
+            RuleFor(r => r.Title).NotEmpty();
+            RuleFor(r => r.Content).NotEmpty();
+        }
+    }
+
+    internal sealed class Handler : IRequestHandler<Command, Result<Guid>>
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IValidator<Command> _validator;
 
-        public Handler(ApplicationDbContext dbContext)
+        public Handler(ApplicationDbContext dbContext, IValidator<Command> validator)
         {
             _dbContext = dbContext;
+            _validator = validator;
         }
 
-        public async Task<Guid> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Handle(Command request, CancellationToken cancellationToken)
         {
+
+            var validation = _validator.Validate(request);
+            if (!validation.IsValid)
+            {
+                return Result.Fail<Guid>(validation.ToString());
+            }
+
             var article = new Article
             {
                 Id = Guid.NewGuid(),
@@ -37,7 +57,7 @@ public static class CreateArticle
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return article.Id;
+            return Result.Ok(article.Id);
         }
     }
 
@@ -45,9 +65,15 @@ public static class CreateArticle
     {
         app.MapPost("api/article", async (Command command, ISender sender) =>
         {
-            var articleId = await sender.Send(command);
+            var result = await sender.Send(command);
 
-            return Results.Ok(articleId);
+            if (result.IsFailure)
+            {
+                return Results.BadRequest(result.Error);
+            }
+
+
+            return Results.Ok(result.Value);
         });
     }
 }
