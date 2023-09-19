@@ -1,6 +1,7 @@
 ﻿using Vertical_Slice_Architecture.Database;
 using Vertical_Slice_Architecture.Entities;
 using Vertical_Slice_Architecture.Shared;
+using static Vertical_Slice_Architecture.Features.Articles.CreateArticle;
 
 namespace Vertical_Slice_Architecture.Features.Articles;
 
@@ -35,7 +36,6 @@ public static class CreateArticle
 
         public async Task<Result<Guid>> Handle(Command request, CancellationToken cancellationToken)
         {
-
             var validation = _validator.Validate(request);
             if (!validation.IsValid)
             {
@@ -58,38 +58,18 @@ public static class CreateArticle
             return Result.Success(article.Id);
         }
     }
+}
 
-    public class Endpoint : ICarterModule
+public class Endpoint : ICarterModule
+{
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
-        public void AddRoutes(IEndpointRouteBuilder app)
+        app.MapPost("api/articles", async (Command command, ISender sender) =>
         {
-            app.MapPost("api/articles", async (Command command, ISender sender) =>
-            {
-                var result = await sender.Send(command);
-
-                if (result.IsFailure)
-                {
-                    return Results.BadRequest(result.Error);
-                }
-
-                return Results.Ok(result.Value);
-            }).WithTags("Todos"); ;
-        }
+            var result = await sender.Send(command);
+            return result.IsFailure
+            ? Results.BadRequest(result.Error)
+            : Results.Ok(result.Value);
+        });
     }
-
-    //public static void MapEndpoint(this IEndpointRouteBuilder app)
-    //{
-    //    app.MapPost("api/article", async (Command command, ISender sender) =>
-    //    {
-    //        var result = await sender.Send(command);
-
-    //        if (result.IsFailure)
-    //        {
-    //            return Results.BadRequest(result.Error);
-    //        }
-
-
-    //        return Results.Ok(result.Value);
-    //    });
-    //}
 }
