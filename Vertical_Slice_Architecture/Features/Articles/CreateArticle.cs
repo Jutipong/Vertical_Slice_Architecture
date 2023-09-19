@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Carter;
+using FluentValidation;
 using MediatR;
 using Vertical_Slice_Architecture.Database;
 using Vertical_Slice_Architecture.Entities;
@@ -61,19 +62,21 @@ public static class CreateArticle
         }
     }
 
-    public static void MapEndpoint(this IEndpointRouteBuilder app)
+    public class Endpoint : ICarterModule
     {
-        app.MapPost("api/article", async (Command command, ISender sender) =>
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
-            var result = await sender.Send(command);
-
-            if (result.IsFailure)
+            app.MapPost("api/article", async (Command command, ISender sender) =>
             {
-                return Results.BadRequest(result.Error);
-            }
+                var result = await sender.Send(command);
 
+                if (result.IsFailure)
+                {
+                    return Results.BadRequest(result.Error);
+                }
 
-            return Results.Ok(result.Value);
-        });
+                return Results.Ok(result.Value);
+            });
+        }
     }
 }

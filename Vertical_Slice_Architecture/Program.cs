@@ -2,7 +2,6 @@ using Carter;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Vertical_Slice_Architecture.Database;
-using Vertical_Slice_Architecture.Features.Articles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,7 +34,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-CreateArticle.MapEndpoint(app);
-
+app.MapCarter();
 app.UseHttpsRedirection();
 app.Run();
