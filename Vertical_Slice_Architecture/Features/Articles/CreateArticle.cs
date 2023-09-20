@@ -1,5 +1,5 @@
-﻿using Vertical_Slice_Architecture.Shared;
-using static Vertical_Slice_Architecture.Features.Articles.CreateArticle;
+﻿using Vertical_Slice_Architecture.Contracts;
+using Vertical_Slice_Architecture.Shared;
 
 namespace Vertical_Slice_Architecture.Features.Articles;
 
@@ -46,25 +46,28 @@ public static class CreateArticle
                 Title = request.Title,
                 Content = request.Content,
                 Tags = request.Tags,
-                CreateOnUtc = DateTime.UtcNow
+                CreateOnUtc = DateTime.UtcNow,
+                PublishedOnUtc = DateTime.UtcNow
             };
 
             _dbContext.Add(article);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Success(article.Id);
+            return article.Id;
         }
     }
 }
 
-public class Endpoint : ICarterModule
+public class CreateArticleEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/articles", async (Command command, ISender sender) =>
+        app.MapPost("api/articles", async (CreateArticleRequest request, ISender sender) =>
         {
+            var command = request.Adapt<CreateArticle.Command>();
             var result = await sender.Send(command);
+
             return result.IsFailure
             ? Results.BadRequest(result.Error)
             : Results.Ok(result.Value);
