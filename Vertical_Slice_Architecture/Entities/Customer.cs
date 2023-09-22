@@ -9,14 +9,17 @@ namespace Entities;
 public partial class Customer
 {
     [Key]
-    public Guid ID { get; set; }
+    public Guid Id { get; set; }
 
+    [StringLength(20)]
     public string? Code { get; set; }
 
+    [StringLength(100)]
     public string? Name { get; set; }
 
-    public short? Age { get; set; }
+    public int? Age { get; set; }
 
+    [StringLength(100)]
     public string? Email { get; set; }
 
     public bool? IsActive { get; set; }
