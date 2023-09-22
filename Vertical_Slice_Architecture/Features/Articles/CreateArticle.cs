@@ -1,16 +1,17 @@
-﻿using Vertical_Slice_Architecture.Contracts;
+﻿using Vertical_Slice_Architecture.Abstractions.Messaging;
+using Vertical_Slice_Architecture.Contracts;
 using Vertical_Slice_Architecture.Shared;
 
 namespace Vertical_Slice_Architecture.Features.Articles;
 
 public static class CreateArticle
 {
-    public class Command : IRequest<Result<Guid>>
-    {
-        public string Title { get; set; } = string.Empty;
-        public string Content { get; set; } = string.Empty;
-        public string Tags { get; set; } = string.Empty;
-    }
+    //public class Command : IRequest<Result<Guid>>
+    //{
+    //    public string Title { get; set; } = string.Empty;
+    //    public string Content { get; set; } = string.Empty;
+    //    public string Tags { get; set; } = string.Empty;
+    //}
 
     public class Validator : AbstractValidator<Command>
     {
@@ -21,25 +22,19 @@ public static class CreateArticle
         }
     }
 
+    public record Command(string Title, string Content, string Tags) : ICommandBase, IRequest<Result<Guid>>;
+
     internal sealed class Handler : IRequestHandler<Command, Result<Guid>>
     {
         private readonly SqlContext _dbContext;
-        private readonly IValidator<Command> _validator;
 
-        public Handler(SqlContext dbContext, IValidator<Command> validator)
+        public Handler(SqlContext dbContext)
         {
             _dbContext = dbContext;
-            _validator = validator;
         }
 
         public async Task<Result<Guid>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var validation = _validator.Validate(request);
-            if (!validation.IsValid)
-            {
-                return Result.Failure<Guid>(new Error("CreateArticle.Validation", validation.ToString()));
-            }
-
             var article = new Article
             {
                 Id = Guid.NewGuid(),

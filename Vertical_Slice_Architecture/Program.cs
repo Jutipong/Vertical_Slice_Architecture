@@ -1,4 +1,6 @@
+using Vertical_Slice_Architecture.Abstractions.Behaviors;
 using Vertical_Slice_Architecture.Extensions.Swagger;
+using Vertical_Slice_Architecture.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +10,11 @@ builder.Services.AddDbContext<SqlContext>(o => o.UseSqlServer(sqlConnection));
 var assembly = typeof(Program).Assembly;
 
 builder.AddSwagger();
-builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssembly(assembly);
+    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+});
 builder.Services.AddCors();
 builder.Services.AddCarter();
 builder.Services.AddValidatorsFromAssembly(assembly);
@@ -22,6 +28,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerEndpoints();
 }
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.MapCarter();
 app.UseHttpsRedirection();
 app.Run();
