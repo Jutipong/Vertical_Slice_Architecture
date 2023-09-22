@@ -17,10 +17,11 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         // Validate
         var context = new ValidationContext<TRequest>(request);
 
-        var errors = _validators
-            .Select(validators => validators.Validate(context))
-            .Where(validatorsResult => !validatorsResult.IsValid)
-            .SelectMany(validatorsResult => validatorsResult.Errors)
+        var validationFailures = await Task.Run(() => _validators.Select(validators => validators.ValidateAsync(context)));
+
+        var errors = validationFailures
+            .Where(validatorsResult => !validatorsResult.Result.IsValid)
+            .SelectMany(validatorsResult => validatorsResult.Result.Errors)
             .Select(failure => new ValidationError(failure.ErrorCode, failure.ErrorMessage))
             .ToList();
 
