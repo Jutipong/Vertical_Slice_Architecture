@@ -1,4 +1,4 @@
-﻿using Vertical_Slice_Architecture.Contracts;
+﻿using Vertical_Slice_Architecture.Domains;
 using Vertical_Slice_Architecture.Shared;
 
 namespace Vertical_Slice_Architecture.Features.Articles;
