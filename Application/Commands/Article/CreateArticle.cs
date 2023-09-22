@@ -1,16 +1,17 @@
-﻿namespace Application.Article.Command;
+﻿namespace Application.Commands.Article;
 public static class CreateArticle
 {
+    public class Command : Domain.Dtos.Article.Create, ICommandBase, IRequest<Result<Guid>> { }
+
     public class Validator : AbstractValidator<Command>
     {
         public Validator()
         {
             RuleFor(r => r.Title).NotEmpty();
             RuleFor(r => r.Content).NotEmpty();
+            RuleFor(r => r.Tags).NotEmpty();
         }
     }
-
-    public record Command(string Title, string Content, string Tags) : ICommandBase, IRequest<Result<Guid>>;
 
     internal sealed class Handler : IRequestHandler<Command, Result<Guid>>
     {
@@ -41,3 +42,4 @@ public static class CreateArticle
         }
     }
 }
+
