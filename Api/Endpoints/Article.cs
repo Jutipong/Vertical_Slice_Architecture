@@ -1,5 +1,8 @@
-﻿using Application.Features.Article.Command;
+﻿using System.Transactions;
+using Application.Features.Article.Command;
 using Application.Features.Article.Queries;
+using Application.Features.Customer.Command;
+using Databases;
 
 namespace Api.Endpoints;
 
@@ -16,13 +19,23 @@ public class Article : ICarterModule
            : Results.Ok(result.Value);
         });
 
-        app.MapPost("/article", async (CreateArticle.Command req, ISender sender) =>
+        app.MapPost("/article", async (
+            SqlContext db,
+            CreateArticle.Command req,
+            ISender sender,
+            CancellationToken cancellationToken) =>
         {
-            var result = await sender.Send(req.Adapt<CreateArticle.Command>());
+            await sender.Send(req, cancellationToken);
+            await sender.Send(new CreateCustomer.Query { Name = "Test", Code = "code" }, cancellationToken);
+            // await sender.Send(req);
 
-            return result.IsFailure
-            ? Results.BadRequest(result.Error)
-            : Results.Ok(result.Value);
+            // await sender.Send(new CreateCustomer.Query { Name = "Test", Code = "code" });
+
+            await db.SaveChangesAsync(cancellationToken);
+
+            // return result.IsFailure
+            // ? Results.BadRequest(result.Error)
+            // : Results.Ok(result.Value);
         });
 
     }
