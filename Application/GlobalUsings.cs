@@ -1,7 +1,5 @@
-﻿global using Carter;
+﻿global using Application.Abstractions.Messaging;
 global using Databases;
-global using Entities;
+global using Domain.Models;
 global using FluentValidation;
-global using Mapster;
 global using MediatR;
-global using Microsoft.EntityFrameworkCore;

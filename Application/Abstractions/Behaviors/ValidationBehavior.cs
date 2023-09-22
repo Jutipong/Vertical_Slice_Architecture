@@ -1,8 +1,5 @@
-﻿using Application.Abstractions.Messaging;
-using Application.Extensions.Exceptions;
-
+﻿
 namespace Application.Abstractions.Behaviors;
-
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : ICommandBase
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
@@ -22,12 +19,12 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         var errors = validationFailures
             .Where(validatorsResult => !validatorsResult.Result.IsValid)
             .SelectMany(validatorsResult => validatorsResult.Result.Errors)
-            .Select(failure => new ValidationError(failure.ErrorCode, failure.ErrorMessage))
+            .Select(failure => new Domain.Extensions.Exceptions.ValidationError(failure.ErrorCode, failure.ErrorMessage))
             .ToList();
 
         if (errors.Any())
         {
-            throw new Extensions.Exceptions.ValidationException(errors);
+            throw new Domain.Extensions.Exceptions.ValidationException(errors);
         }
 
         var response = await next();
@@ -35,3 +32,4 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         return response;
     }
 }
+

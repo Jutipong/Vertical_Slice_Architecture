@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Application.Middleware;
+namespace Api.Middleware;
 
 public class ExceptionHandlingMiddleware
 {
@@ -48,7 +48,7 @@ public class ExceptionHandlingMiddleware
     {
         return ex switch
         {
-            Application.Extensions.Exceptions.ValidationException validationException => new ExceptionDetails(
+            Domain.Extensions.Exceptions.ValidationException validationException => new ExceptionDetails(
                 StatusCodes.Status400BadRequest,
                 "ValidationFailure",
                 "Validation error",

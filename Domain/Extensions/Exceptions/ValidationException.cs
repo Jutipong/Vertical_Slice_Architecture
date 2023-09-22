@@ -1,5 +1,4 @@
-﻿namespace Application.Extensions.Exceptions;
-
+﻿namespace Domain.Extensions.Exceptions;
 public class ValidationException : Exception
 {
     public ValidationException(IReadOnlyCollection<ValidationError> errors) : base("Validation failed")
@@ -11,3 +10,4 @@ public class ValidationException : Exception
 }
 
 public record ValidationError(string PropertyName, string ErrorMessage);
+

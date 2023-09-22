@@ -1,5 +1,4 @@
-﻿namespace Application.Shared;
-
+﻿namespace Domain.Models;
 public class Result
 {
     protected internal Result(bool isSuccess, Error error)

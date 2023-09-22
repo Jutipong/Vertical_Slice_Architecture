@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace Application.Extensions.Swagger;
+namespace Api.Extensions;
 
 public static partial class ServiceCollection
 {
@@ -58,5 +58,20 @@ public static partial class ServiceCollection
         });
 
         return services;
+    }
+}
+
+internal static partial class ApplicationBuilder
+{
+    public static IApplicationBuilder UseSwaggerEndpoints(this IApplicationBuilder app)
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
+            //c.RoutePrefix = string.Empty;
+        });
+
+        return app;
     }
 }
