@@ -1,4 +1,4 @@
-namespace Vertical_Slice_Architecture.Contracts;
+namespace Vertical_Slice_Architecture.Domains;
 
 public class ArticleResponse
 {
