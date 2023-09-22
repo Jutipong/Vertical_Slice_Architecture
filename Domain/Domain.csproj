@@ -15,6 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Dtos\Article\" />
 		<Folder Include="Enums\" />
 	</ItemGroup>
 

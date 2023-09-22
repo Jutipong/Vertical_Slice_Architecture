@@ -1,7 +1,13 @@
-﻿namespace Application.Commands.Article;
+﻿namespace Application.Features.Article.Command;
+
 public static class CreateArticle
 {
-    public class Command : Domain.Dtos.Article.Create, ICommandBase, IRequest<Result<Guid>> { }
+    public class Command : ICommandBase, IRequest<Result<Guid>>
+    {
+        public string Title { get; set; } = string.Empty;
+        public string Content { get; set; } = string.Empty;
+        public string Tags { get; set; } = string.Empty;
+    }
 
     public class Validator : AbstractValidator<Command>
     {
@@ -42,4 +48,3 @@ public static class CreateArticle
         }
     }
 }
-
