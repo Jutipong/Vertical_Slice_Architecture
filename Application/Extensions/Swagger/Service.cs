@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace Vertical_Slice_Architecture.Extensions.Swagger;
+namespace Application.Extensions.Swagger;
 
 public static partial class ServiceCollection
 {

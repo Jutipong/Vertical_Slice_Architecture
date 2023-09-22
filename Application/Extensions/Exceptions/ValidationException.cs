@@ -1,4 +1,4 @@
-﻿namespace Vertical_Slice_Architecture.Exceptions;
+﻿namespace Application.Extensions.Exceptions;
 
 public class ValidationException : Exception
 {

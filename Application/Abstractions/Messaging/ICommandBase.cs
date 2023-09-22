@@ -1,4 +1,4 @@
-﻿namespace Vertical_Slice_Architecture.Abstractions.Messaging;
+﻿namespace Application.Abstractions.Messaging;
 
 public interface ICommand : IRequest, ICommandBase
 {

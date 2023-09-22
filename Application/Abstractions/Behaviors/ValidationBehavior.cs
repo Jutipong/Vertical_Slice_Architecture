@@ -1,7 +1,7 @@
-﻿using Vertical_Slice_Architecture.Abstractions.Messaging;
-using Vertical_Slice_Architecture.Exceptions;
+﻿using Application.Abstractions.Messaging;
+using Application.Extensions.Exceptions;
 
-namespace Vertical_Slice_Architecture.Abstractions.Behaviors;
+namespace Application.Abstractions.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : ICommandBase
 {
@@ -27,7 +27,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
 
         if (errors.Any())
         {
-            throw new Exceptions.ValidationException(errors);
+            throw new Extensions.Exceptions.ValidationException(errors);
         }
 
         var response = await next();

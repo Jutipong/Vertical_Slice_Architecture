@@ -1,6 +1,6 @@
-using Vertical_Slice_Architecture.Abstractions.Behaviors;
-using Vertical_Slice_Architecture.Extensions.Swagger;
-using Vertical_Slice_Architecture.Middleware;
+using Application.Abstractions.Behaviors;
+using Application.Extensions.Swagger;
+using Application.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 

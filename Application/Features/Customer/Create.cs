@@ -1,7 +1,7 @@
-﻿using Vertical_Slice_Architecture.Shared;
-using static Vertical_Slice_Architecture.Features.Customer.Create;
+﻿using Application.Shared;
+using static Application.Features.Customer.Create;
 
-namespace Vertical_Slice_Architecture.Features.Customer;
+namespace Application.Features.Customer;
 
 public static class Create
 {

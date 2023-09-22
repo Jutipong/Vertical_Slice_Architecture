@@ -1,4 +1,4 @@
-﻿namespace Vertical_Slice_Architecture.Shared;
+﻿namespace Application.Shared;
 
 public class Result
 {

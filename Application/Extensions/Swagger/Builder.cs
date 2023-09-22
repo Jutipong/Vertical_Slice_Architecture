@@ -1,4 +1,4 @@
-﻿namespace Vertical_Slice_Architecture.Extensions.Swagger;
+﻿namespace Application.Extensions.Swagger;
 
 internal static partial class ApplicationBuilder
 {

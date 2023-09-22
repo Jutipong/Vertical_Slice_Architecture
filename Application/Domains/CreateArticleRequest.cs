@@ -1,6 +1,6 @@
-using Vertical_Slice_Architecture.Abstractions.Messaging;
+using Application.Abstractions.Messaging;
 
-namespace Vertical_Slice_Architecture.Domains;
+namespace Application.Domains;
 
 public class CreateArticleRequest : ICommandBase
 {

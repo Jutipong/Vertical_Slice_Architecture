@@ -1,8 +1,8 @@
-﻿using Vertical_Slice_Architecture.Abstractions.Messaging;
-using Vertical_Slice_Architecture.Domains;
-using Vertical_Slice_Architecture.Shared;
+﻿using Application.Abstractions.Messaging;
+using Application.Domains;
+using Application.Shared;
 
-namespace Vertical_Slice_Architecture.Features.Articles;
+namespace Application.Features.Articles;
 
 public static class CreateArticle
 {
