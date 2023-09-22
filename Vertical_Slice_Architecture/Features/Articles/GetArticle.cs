@@ -23,7 +23,7 @@ public static class GetArticle
         {
             var articleResponse = await _dbContext.Article
                 .ProjectToType<ArticleResponse>()
-                .FirstOrDefaultAsync(article => article.Id == request.Id, cancellationToken: cancellationToken);
+                .FirstOrDefaultAsync(article => article.Id == request.Id, cancellationToken);
 
             return articleResponse is null
                 ? Result.Failure<ArticleResponse>(new Error("GetArticle.Null", "data not found"))
