@@ -2,7 +2,6 @@
 using Api.Extensions;
 using Api.Middleware;
 using Application;
-using Databases;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Serilog;

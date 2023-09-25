@@ -4,11 +4,15 @@ using Application.Features.Customer.Command;
 
 namespace Api.Endpoints;
 
-public class Article : ICarterModule
+public class Article : CarterModule
 {
-    public void AddRoutes(IEndpointRouteBuilder app)
+    public Article() : base("article")
     {
-        app.MapGet("/article{id}", async (Guid id, ISender sender) =>
+    }
+
+    public override void AddRoutes(IEndpointRouteBuilder app)
+    {
+        app.MapGet("/{id}", async (Guid id, ISender sender) =>
         {
             var result = await sender.Send(new GetArticle.Query { Id = id });
 
@@ -17,10 +21,10 @@ public class Article : ICarterModule
            : Results.Ok(result.Value);
         });
 
-        app.MapPost("/article", async (
-            SqlContext db,
+        app.MapPost("", async (
             CreateArticle.Command req,
             ISender sender,
+            SqlContext db,
             CancellationToken cancellationToken) =>
         {
             await sender.Send(req, cancellationToken);
@@ -29,11 +33,6 @@ public class Article : ICarterModule
             await db.SaveChangesAsync(cancellationToken);
 
             return Results.Ok(req.Id);
-
-            // return result.IsFailure
-            // ? Results.BadRequest(result.Error)
-            // : Results.Ok(result.Value);
         });
-
     }
 }
