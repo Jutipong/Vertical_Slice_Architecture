@@ -2,7 +2,6 @@
 using Api.Extensions;
 using Api.Middleware;
 using Application;
-using Carter;
 using Databases;
 using Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +19,6 @@ builder.Services.AddCarter();
 
 builder.Services
     .AddApplication()
-    .AddInfrastructure()
     .AddInfrastructure();
 
 builder.Host.UseSerilog((context, configuration) =>
