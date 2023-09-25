@@ -1,8 +1,6 @@
-﻿using System.Transactions;
-using Application.Features.Article.Command;
+﻿using Application.Features.Article.Command;
 using Application.Features.Article.Queries;
 using Application.Features.Customer.Command;
-using Databases;
 
 namespace Api.Endpoints;
 
@@ -27,11 +25,10 @@ public class Article : ICarterModule
         {
             await sender.Send(req, cancellationToken);
             await sender.Send(new CreateCustomer.Query { Name = "Test", Code = "code" }, cancellationToken);
-            // await sender.Send(req);
-
-            // await sender.Send(new CreateCustomer.Query { Name = "Test", Code = "code" });
 
             await db.SaveChangesAsync(cancellationToken);
+
+            return Results.Ok(req.Id);
 
             // return result.IsFailure
             // ? Results.BadRequest(result.Error)
