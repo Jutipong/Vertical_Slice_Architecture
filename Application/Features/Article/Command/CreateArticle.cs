@@ -2,7 +2,7 @@
 
 public static class CreateArticle
 {
-    public class Command : ICommandBase, IRequest
+    public class Command : ICommandBase, IRequest<Result<Guid>>
     {
         public Guid Id { get; set; }
         public string Title { get; set; } = string.Empty;
@@ -20,7 +20,7 @@ public static class CreateArticle
         }
     }
 
-    internal sealed class Handler : IRequestHandler<Command>
+    internal sealed class Handler : IRequestHandler<Command, Result<Guid>>
     {
         private readonly SqlContext _dbContext;
 
@@ -29,7 +29,7 @@ public static class CreateArticle
             _dbContext = dbContext;
         }
 
-        public async Task Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Handle(Command request, CancellationToken cancellationToken)
         {
             var article = new Entities.Article
             {
@@ -43,7 +43,9 @@ public static class CreateArticle
 
             await _dbContext.AddAsync(article);
 
-            // await _dbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
+            return article.Id;
         }
     }
 }

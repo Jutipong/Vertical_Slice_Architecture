@@ -1,6 +1,5 @@
 ﻿
 using Application.Features.Customer.Command;
-using Databases;
 
 namespace Api;
 
@@ -19,6 +18,10 @@ public class Customer : ICarterModule
             // return result.IsFailure
             // ? Results.BadRequest(result.Error)
             // : Results.Ok(result.Value);
+
+            //return result.IsFailure
+            //? Results.BadRequest(result.Error)
+            //: Results.Ok(result.Value);
         });
     }
 }
