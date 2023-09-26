@@ -19,12 +19,12 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         var errors = validationFailures
             .Where(validatorsResult => !validatorsResult.Result.IsValid)
             .SelectMany(validatorsResult => validatorsResult.Result.Errors)
-            .Select(failure => new Domain.Extensions.Exceptions.ValidationError(failure.ErrorCode, failure.ErrorMessage))
+            .Select(failure => new Domain.Exceptions.ValidationError(failure.ErrorCode, failure.ErrorMessage))
             .ToList();
 
         if (errors.Any())
         {
-            throw new Domain.Extensions.Exceptions.ValidationException(errors);
+            throw new Domain.Exceptions.ValidationException(errors);
         }
 
         var response = await next();

@@ -1,4 +1,4 @@
-﻿namespace Domain.Extensions.Exceptions;
+﻿namespace Domain.Exceptions;
 public class ValidationException : Exception
 {
     public ValidationException(IReadOnlyCollection<ValidationError> errors) : base("Validation failed")

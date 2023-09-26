@@ -48,7 +48,7 @@ public class ExceptionHandlingMiddleware
     {
         return ex switch
         {
-            Domain.Extensions.Exceptions.ValidationException validationException => new ExceptionDetails(
+            Domain.Exceptions.ValidationException validationException => new ExceptionDetails(
                 StatusCodes.Status400BadRequest,
                 "ValidationFailure",
                 "Validation error",
