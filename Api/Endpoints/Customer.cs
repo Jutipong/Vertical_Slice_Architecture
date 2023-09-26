@@ -1,5 +1,5 @@
 ﻿
-using Application.Features.Customer.Command;
+using Application.Customer.Command;
 
 namespace Api;
 

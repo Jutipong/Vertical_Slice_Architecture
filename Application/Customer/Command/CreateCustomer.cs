@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Customer.Command;
+﻿namespace Application.Customer.Command;
 public static class CreateCustomer
 {
     public class Query : ICommandBase, IRequest

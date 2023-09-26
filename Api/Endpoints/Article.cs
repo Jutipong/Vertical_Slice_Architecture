@@ -1,5 +1,5 @@
-﻿using Application.Features.Article.Command;
-using Application.Features.Article.Queries;
+﻿using Application.Article.Command;
+using Application.Article.Queries;
 
 namespace Api.Endpoints;
 
@@ -13,14 +13,14 @@ public class Article : CarterModule
     {
         app.MapGet("/{id}", async (Guid id, ISender sender) =>
         {
-            var result = await sender.Send(new GetArticle.Query { Id = id });
+            var result = await sender.Send(new GetById.Query { Id = id });
 
             return result.IsFailure
            ? Results.NotFound(result.Error)
            : Results.Ok(result.Value);
         });
 
-        app.MapPost("", async (ISender sender, CreateArticle.Command req, CancellationToken cancellationToken) =>
+        app.MapPost("", async (ISender sender, Create.Command req, CancellationToken cancellationToken) =>
         {
             var result = await sender.Send(req, cancellationToken);
 

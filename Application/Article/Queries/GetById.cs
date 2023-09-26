@@ -1,10 +1,7 @@
-﻿namespace Application.Features.Article.Queries;
-public static class GetArticle
+﻿namespace Application.Article.Queries;
+public static class GetById
 {
-    public class Query : ICommandBase, IRequest<Result<Entities.Article>>
-    {
-        public Guid Id { get; set; }
-    }
+    public class Query : Domain.Dtos.Article.GetById, ICommandBase, IRequest<Result<Entities.Article>> { }
 
     internal sealed class Handler : IRequestHandler<Query, Result<Entities.Article>>
     {

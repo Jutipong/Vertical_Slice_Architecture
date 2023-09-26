@@ -1,14 +1,8 @@
-﻿namespace Application.Features.Article.Command;
+﻿namespace Application.Article.Command;
 
-public static class CreateArticle
+public static class Create
 {
-    public class Command : ICommandBase, IRequest<Result<Guid>>
-    {
-        public Guid Id { get; set; }
-        public string Title { get; set; } = string.Empty;
-        public string Content { get; set; } = string.Empty;
-        public string Tags { get; set; } = string.Empty;
-    }
+    public class Command : Domain.Dtos.Article.Create, ICommandBase, IRequest<Result<Guid>> { }
 
     public class Validator : AbstractValidator<Command>
     {
@@ -22,11 +16,11 @@ public static class CreateArticle
 
     internal sealed class Handler : IRequestHandler<Command, Result<Guid>>
     {
-        private readonly SqlContext _dbContext;
+        private readonly SqlContext _sqlContext;
 
-        public Handler(SqlContext dbContext)
+        public Handler(SqlContext sqlContext)
         {
-            _dbContext = dbContext;
+            _sqlContext = sqlContext;
         }
 
         public async Task<Result<Guid>> Handle(Command request, CancellationToken cancellationToken)
@@ -41,9 +35,9 @@ public static class CreateArticle
                 PublishedOnUtc = DateTime.UtcNow
             };
 
-            await _dbContext.AddAsync(article);
+            await _sqlContext.AddAsync(article, cancellationToken);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _sqlContext.SaveChangesAsync(cancellationToken);
 
             return article.Id;
         }
