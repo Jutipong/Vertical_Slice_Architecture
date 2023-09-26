@@ -1,27 +1,23 @@
-﻿
-using Application.Customer.Command;
+﻿using Application.Customer.Command;
 
 namespace Api;
 
-public class Customer : ICarterModule
+public class Customer : CarterModule
 {
-    public void AddRoutes(IEndpointRouteBuilder app)
+    public Customer() : base("customer")
     {
-        app.MapPost("/customer", async (
-            SqlContext db,
-            CreateCustomer.Query req,
-            ISender sender,
-            CancellationToken cancellationToken) =>
-        {
-            await sender.Send(req, cancellationToken);
-            await db.SaveChangesAsync(cancellationToken);
-            // return result.IsFailure
-            // ? Results.BadRequest(result.Error)
-            // : Results.Ok(result.Value);
+        this.WithTags("Customer");
+    }
 
-            //return result.IsFailure
-            //? Results.BadRequest(result.Error)
-            //: Results.Ok(result.Value);
+    public override void AddRoutes(IEndpointRouteBuilder app)
+    {
+        app.MapPost("", async (CreateCustomer.Query req, ISender sender, CancellationToken cancellationToken) =>
+        {
+            var result = await sender.Send(req, cancellationToken);
+
+            return result.IsFailure
+             ? Results.BadRequest(result.Error)
+             : Results.Ok(result.Value);
         });
     }
 }

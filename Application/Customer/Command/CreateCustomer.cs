@@ -1,13 +1,7 @@
 ﻿namespace Application.Customer.Command;
 public static class CreateCustomer
 {
-    public class Query : ICommandBase, IRequest
-    {
-        public string Code { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
-        public int Age { get; set; } = 99;
-        public string Email { get; set; } = string.Empty;
-    }
+    public class Query : Domain.Dtos.Customer.Create, ICommandBase, IRequest<Result<Entities.Customer>> { }
 
     public class Validator : AbstractValidator<Query>
     {
@@ -18,7 +12,7 @@ public static class CreateCustomer
         }
     }
 
-    internal sealed class Handler : IRequestHandler<Query>
+    internal sealed class Handler : IRequestHandler<Query, Result<Entities.Customer>>
     {
         private readonly SqlContext _dbContext;
 
@@ -27,9 +21,9 @@ public static class CreateCustomer
             _dbContext = dbContext;
         }
 
-        public async Task Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Result<Entities.Customer>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var article = new Entities.Customer
+            var customer = new Entities.Customer
             {
                 Id = Guid.NewGuid(),
                 Code = request.Code,
@@ -38,11 +32,11 @@ public static class CreateCustomer
                 Email = request.Email
             };
 
-            await _dbContext.AddAsync(article);
+            await _dbContext.AddAsync(customer, cancellationToken);
 
-            // await _dbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
-            // return article.Id;
+            return customer;
         }
     }
 }
