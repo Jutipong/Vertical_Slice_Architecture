@@ -1,9 +1,9 @@
 ﻿namespace Application.Article.Queries;
 public static class GetById
 {
-    public class Query : Domain.Dtos.Article.GetById, ICommandBase, IRequest<Result<Entities.Article>> { }
+    public class ArticleGetByIdCommand : Domain.Dtos.Article.GetById, ICommandBase, IRequest<Result<Entities.Article>> { }
 
-    internal sealed class Handler : IRequestHandler<Query, Result<Entities.Article>>
+    internal sealed class Handler : IRequestHandler<ArticleGetByIdCommand, Result<Entities.Article>>
     {
         private readonly SqlContext _dbContext;
 
@@ -12,7 +12,7 @@ public static class GetById
             _dbContext = dbContext;
         }
 
-        public async Task<Result<Entities.Article>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Result<Entities.Article>> Handle(ArticleGetByIdCommand request, CancellationToken cancellationToken)
         {
             var articleResponse = await _dbContext.Article
                 .FirstOrDefaultAsync(article => article.Id == request.Id, cancellationToken);

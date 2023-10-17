@@ -1,10 +1,10 @@
-﻿namespace Application.Article.Command;
+﻿namespace Application.Article.Commands;
 
 public static class Create
 {
-    public class Command : Domain.Dtos.Article.Create, ICommandBase, IRequest<Result<Guid>> { }
+    public class ArticleCreateCommand : Domain.Dtos.Article.Create, ICommandBase, IRequest<Result<Guid>> { }
 
-    public class Validator : AbstractValidator<Command>
+    public class Validator : AbstractValidator<ArticleCreateCommand>
     {
         public Validator()
         {
@@ -14,7 +14,7 @@ public static class Create
         }
     }
 
-    internal sealed class Handler : IRequestHandler<Command, Result<Guid>>
+    internal sealed class Handler : IRequestHandler<ArticleCreateCommand, Result<Guid>>
     {
         private readonly SqlContext _sqlContext;
 
@@ -23,7 +23,7 @@ public static class Create
             _sqlContext = sqlContext;
         }
 
-        public async Task<Result<Guid>> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<Guid>> Handle(ArticleCreateCommand request, CancellationToken cancellationToken)
         {
             var article = new Entities.Article
             {
