@@ -11,7 +11,7 @@ public class Customer : CarterModule
 
     public override void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("", async (CreateCustomer.Query req, ISender sender, CancellationToken cancellationToken) =>
+        app.MapPost("", async (Create.Query req, ISender sender, CancellationToken cancellationToken) =>
         {
             var result = await sender.Send(req, cancellationToken);
 

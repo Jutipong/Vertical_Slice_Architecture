@@ -1,5 +1,5 @@
 ﻿namespace Application.Customer.Command;
-public static class CreateCustomer
+public static class Create
 {
     public class Query : Domain.Dtos.Customer.Create, ICommandBase, IRequest<Result<Entities.Customer>> { }
 

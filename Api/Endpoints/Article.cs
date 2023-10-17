@@ -7,6 +7,7 @@ public class Article : CarterModule
 {
     public Article() : base("article")
     {
+        this.WithTags("Article");
     }
 
     public override void AddRoutes(IEndpointRouteBuilder app)
