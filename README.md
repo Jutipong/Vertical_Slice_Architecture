@@ -1,5 +1,7 @@
 # Vertical_Slice_Architecture
 
+// api url: http://localhost:5197/swagger/index.html
+
 // todo
 using BAL.Serviecx;
 using Microsoft.Extensions.DependencyInjection;
