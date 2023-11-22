@@ -1,4 +1,4 @@
-﻿namespace Application.Abstractions.Messaging;
+﻿namespace Application.Common.Behaviours;
 
 public interface ICommand : IRequest, IValidator
 {

@@ -1,4 +1,6 @@
-﻿namespace Application.Article.Commands;
+﻿using Application.Common.Behaviours;
+
+namespace Application.Article.Commands;
 
 public static class Create
 {

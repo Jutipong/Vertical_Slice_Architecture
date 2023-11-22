@@ -1,6 +1,7 @@
-﻿
-namespace Application.Abstractions.Behaviors;
-public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : ICommandBase
+﻿namespace Application.Common.Behaviours;
+
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : ICommandBase
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -32,4 +33,3 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         return response;
     }
 }
-

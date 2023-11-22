@@ -1,4 +1,4 @@
-﻿using Application.Abstractions.Behaviors;
+﻿using Application.Common.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;

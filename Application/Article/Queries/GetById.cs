@@ -17,6 +17,8 @@ public static class GetById
             var articleResponse = await _dbContext.Article
                 .FirstOrDefaultAsync(article => article.Id == request.Id, cancellationToken);
 
+            articleResponse.Title = null;
+
             return articleResponse is null
                 ? Result.Failure<Entities.Article>(new Error("GetArticle.Null", "data not found"))
                 : articleResponse;
