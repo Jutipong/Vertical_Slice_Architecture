@@ -1,5 +1,6 @@
 ﻿using Application.Article.Commands;
 using Application.Article.Queries;
+using Domain;
 
 namespace Api.Endpoints;
 
