@@ -61,7 +61,7 @@ public partial class SqlContext : DbContext
         {
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -69,7 +69,7 @@ public partial class SqlContext : DbContext
         {
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -78,14 +78,14 @@ public partial class SqlContext : DbContext
             entity.HasKey(e => e.Id).HasName("PK__tmp_ms_x__3214EC2725DE0E29");
 
             entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.IsActive).HasDefaultValueSql("((1))");
+            entity.Property(e => e.IsActive).HasDefaultValue(true);
         });
 
         modelBuilder.Entity<Ms_Channel>(entity =>
         {
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -93,7 +93,7 @@ public partial class SqlContext : DbContext
         {
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -103,7 +103,7 @@ public partial class SqlContext : DbContext
 
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -111,7 +111,7 @@ public partial class SqlContext : DbContext
         {
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -119,7 +119,7 @@ public partial class SqlContext : DbContext
         {
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -127,7 +127,7 @@ public partial class SqlContext : DbContext
         {
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -135,7 +135,7 @@ public partial class SqlContext : DbContext
         {
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -145,7 +145,7 @@ public partial class SqlContext : DbContext
 
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -153,7 +153,7 @@ public partial class SqlContext : DbContext
         {
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -163,7 +163,7 @@ public partial class SqlContext : DbContext
 
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -173,7 +173,7 @@ public partial class SqlContext : DbContext
 
             entity.Property(e => e.ID).HasDefaultValueSql("(newsequentialid())");
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 
@@ -191,7 +191,7 @@ public partial class SqlContext : DbContext
         {
             entity.Property(e => e.ID).ValueGeneratedNever();
             entity.Property(e => e.IsActive)
-                .HasDefaultValueSql("('Y')")
+                .HasDefaultValue("Y")
                 .IsFixedLength();
         });
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Common.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Middleware;
 
@@ -48,7 +49,7 @@ public class ExceptionHandlingMiddleware
     {
         return ex switch
         {
-            Domain.Exceptions.ValidationException validationException => new ExceptionDetails(
+            ValidationException validationException => new ExceptionDetails(
                 StatusCodes.Status400BadRequest,
                 "ValidationFailure",
                 "Validation error",

@@ -6,10 +6,10 @@ set user=sa
 set password=p@ssw0rd
 
 set context_name_space=Databases
-set context_dir=.\Databases
+set context_dir=.\DbSqlServer
 set context_name=SqlContext
 
-set output_dir=.\Entities
+set output_dir=.\DbSqlServer\Entities
 set name_space=Entities
 
 dotnet ef dbcontext scaffold "Server=%host%,%port%;Initial Catalog=%dbname%;User ID=%user%; Password=%password%; Timeout=%timeout%; TrustServerCertificate=True" ^
