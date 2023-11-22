@@ -1,7 +1,7 @@
 ﻿namespace Application.Common.Behaviours;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : ICommandBase
+    where TRequest : IValidatorBase
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 

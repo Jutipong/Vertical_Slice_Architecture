@@ -2,7 +2,7 @@
 
 public static class Create
 {
-    public class ArticleCreateCommand : Domain.Dtos.Article.Create, ICommandBase, IRequest<Result<Guid>> { }
+    public class ArticleCreateCommand : Domain.Dtos.Article.Create, IValidatorBase, IRequest<Result<Guid>> { }
 
     public class Validator : AbstractValidator<ArticleCreateCommand>
     {
@@ -14,15 +14,8 @@ public static class Create
         }
     }
 
-    internal sealed class Handler : IRequestHandler<ArticleCreateCommand, Result<Guid>>
+    public class Handler(SqlContext _db) : IRequestHandler<ArticleCreateCommand, Result<Guid>>
     {
-        private readonly SqlContext _sqlContext;
-
-        public Handler(SqlContext sqlContext)
-        {
-            _sqlContext = sqlContext;
-        }
-
         public async Task<Result<Guid>> Handle(ArticleCreateCommand request, CancellationToken cancellationToken)
         {
             var article = new Entities.Article
@@ -35,9 +28,9 @@ public static class Create
                 PublishedOnUtc = DateTime.UtcNow
             };
 
-            await _sqlContext.AddAsync(article, cancellationToken);
+            await _db.AddAsync(article, cancellationToken);
 
-            await _sqlContext.SaveChangesAsync(cancellationToken);
+            await _db.SaveChangesAsync(cancellationToken);
 
             return article.Id;
         }

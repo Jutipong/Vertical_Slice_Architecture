@@ -10,7 +10,7 @@ public interface ICommand<TResponse> : IRequest<TResponse>, IValidator
 
 }
 
-public interface ICommandBase
+public interface IValidatorBase
 {
 
 }

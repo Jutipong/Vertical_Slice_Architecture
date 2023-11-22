@@ -2,7 +2,7 @@
 
 public static class Create
 {
-    public class CustomerCreateCommand : Domain.Dtos.Customer.Create, ICommandBase, IRequest<Result<Guid>> { }
+    public class CustomerCreateCommand : Domain.Dtos.Customer.Create, IValidatorBase, IRequest<Result<Guid>> { }
 
     public class Validator : AbstractValidator<CustomerCreateCommand>
     {

@@ -1,7 +1,7 @@
 ﻿namespace Application.Customer.Queries;
 public static class GetById
 {
-    public class CustomerGetByIdCommand : Domain.Dtos.Customer.GetById, ICommandBase, IRequest<Result<List<Entities.Customer>>> { }
+    public class CustomerGetByIdCommand : Domain.Dtos.Customer.GetById, IValidatorBase, IRequest<Result<List<Entities.Customer>>> { }
 
     internal sealed class Handler : IRequestHandler<CustomerGetByIdCommand, Result<List<Entities.Customer>>>
     {

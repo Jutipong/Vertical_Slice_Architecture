@@ -14,7 +14,7 @@ public class Article : CarterModule
     {
         app.MapGet("/{id}", async (Guid id, ISender sender) =>
         {
-            var result = await sender.Send(new ArticleGetByIdCommand { Id = id });
+            var result = await sender.Send(new ArticleGetByIdQueries { Id = id });
 
             return result.IsFailure
            ? Results.NotFound(result.Error)
