@@ -2,6 +2,7 @@
 using Api.Extensions;
 using Api.Middleware;
 using Application;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -16,7 +17,8 @@ builder.Services.AddCors();
 builder.Services.AddCarter();
 
 builder.Services
-    .AddApplication();
+    .AddApplication()
+    .AddInfrastructure();
 
 builder.Host.UseSerilog((context, configuration) =>
 {
