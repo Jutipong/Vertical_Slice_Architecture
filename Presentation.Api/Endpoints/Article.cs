@@ -1,5 +1,5 @@
-﻿using static Application.Article.Commands.Create;
-using static Application.Article.Queries.GetById;
+﻿using Application.Article.Commands;
+using Application.Article.Queries;
 
 namespace Api.Endpoints;
 
