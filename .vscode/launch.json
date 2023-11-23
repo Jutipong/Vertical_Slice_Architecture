@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "C#: Presentation.Api [https]",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/Presentation.Api/Presentation.Api.csproj",
+            "launchConfigurationId": "TargetFramework=;https"
+        }
+    ]
+}
