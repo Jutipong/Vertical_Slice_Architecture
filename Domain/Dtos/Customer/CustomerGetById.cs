@@ -1,6 +1,6 @@
 ﻿namespace Domain.Dtos.Customer;
 
-public class GetById
+public class CustomerGetById
 {
     public Guid? Id { get; set; }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Application.Customer.Commands;
 
-public class CustomerCreateCommand : Domain.Dtos.Customer.Create, IValidatorBase, IRequest<Result<Guid>> { }
+public class CustomerCreateCommand : Domain.Dtos.Customer.CustomerCreate, IValidatorBase, IRequest<Result<Guid>> { }
+
 public class CustomerCreateValidator : AbstractValidator<CustomerCreateCommand>
 {
     public CustomerCreateValidator()

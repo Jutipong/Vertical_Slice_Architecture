@@ -1,6 +1,7 @@
 ﻿namespace Application.Customer.Queries;
 
-internal sealed class Handler(SqlContext _db) : IRequestHandler<CustomerGetByIdCommand, Result<List<Entities.Customer>>>
+internal sealed class CustomerGetByIdHandler(SqlContext _db)
+: IRequestHandler<CustomerGetByIdCommand, Result<List<Entities.Customer>>>
 {
     public async Task<Result<List<Entities.Customer>>> Handle(CustomerGetByIdCommand req, CancellationToken cancellationToken)
     {

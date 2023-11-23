@@ -1,6 +1,7 @@
 ﻿namespace Application.Customer.Commands;
 
-internal sealed class Handler(SqlContext _db) : IRequestHandler<CustomerCreateCommand, Result<Guid>>
+internal sealed class CustomerCreateHandler(SqlContext _db)
+: IRequestHandler<CustomerCreateCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CustomerCreateCommand request, CancellationToken cancellationToken)
     {
