@@ -1,7 +1,5 @@
 ﻿namespace Application.Article.Queries;
 
-public class ArticleGetByIdQueries : Domain.Dtos.Article.GetById, IRequest<Result<Entities.Article>> { }
-
 internal sealed class Handler(SqlContext _db) : IRequestHandler<ArticleGetByIdQueries, Result<Entities.Article>>
 {
     public async Task<Result<Entities.Article>> Handle(ArticleGetByIdQueries request, CancellationToken cancellationToken)

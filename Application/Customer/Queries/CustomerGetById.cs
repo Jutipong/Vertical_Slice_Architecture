@@ -1,5 +1,4 @@
 ﻿namespace Application.Customer.Queries;
-public class CustomerGetByIdCommand : Domain.Dtos.Customer.GetById, IRequest<Result<List<Entities.Customer>>> { }
 
 internal sealed class Handler(SqlContext _db) : IRequestHandler<CustomerGetByIdCommand, Result<List<Entities.Customer>>>
 {

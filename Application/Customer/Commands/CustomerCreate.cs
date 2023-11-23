@@ -1,7 +1,5 @@
 ﻿namespace Application.Customer.Commands;
 
-public class CustomerCreateCommand : Domain.Dtos.Customer.Create, IValidatorBase, IRequest<Result<Guid>> { }
-
 internal sealed class Handler(SqlContext _db) : IRequestHandler<CustomerCreateCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(CustomerCreateCommand request, CancellationToken cancellationToken)

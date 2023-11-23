@@ -1,5 +1,7 @@
 ﻿namespace Application.Article.Commands;
 
+public class ArticleCreateCommand : Domain.Dtos.Article.Create, IValidatorBase, IRequest<Result<Guid>> { }
+
 public class ArticleCreateValidator : AbstractValidator<ArticleCreateCommand>
 {
     public ArticleCreateValidator()
