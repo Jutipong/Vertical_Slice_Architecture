@@ -1,6 +1,7 @@
 ﻿namespace Application.Article.Commands;
 
-internal sealed class Handler(SqlContext _db) : IRequestHandler<ArticleCreateCommand, Result<Guid>>
+internal sealed class ArticleCreateHandler(SqlContext _db)
+: IRequestHandler<ArticleCreateCommand, Result<Guid>>
 {
     public async Task<Result<Guid>> Handle(ArticleCreateCommand request, CancellationToken cancellationToken)
     {
