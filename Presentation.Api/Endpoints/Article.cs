@@ -1,5 +1,6 @@
-﻿using static Application.Article.Commands.Create;
-using static Application.Article.Queries.GetById;
+﻿using Application.Article.Commands;
+using Application.Article.Queries;
+using Domain;
 
 namespace Api.Endpoints;
 
@@ -14,7 +15,7 @@ public class Article : CarterModule
     {
         app.MapGet("/{id}", async (Guid id, ISender sender) =>
         {
-            var result = await sender.Send(new ArticleGetByIdCommand { Id = id });
+            var result = await sender.Send(new ArticleGetByIdQueries { Id = id });
 
             return result.IsFailure
            ? Results.NotFound(result.Error)

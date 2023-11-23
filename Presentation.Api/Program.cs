@@ -2,14 +2,15 @@
 using Api.Extensions;
 using Api.Middleware;
 using Application;
+using Domain;
 using Infrastructure;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var sqlConnection = builder.Configuration.GetConnectionString("SqlServer")!;
-builder.Services.AddDbContext<SqlContext>(o => o.UseSqlServer(sqlConnection));
+var config = builder.Configuration;
+var _config = config.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
+builder.Services.AddSingleton(_config);
 
 var assembly = typeof(Program).Assembly;
 builder.AddSwagger();
@@ -18,7 +19,7 @@ builder.Services.AddCarter();
 
 builder.Services
     .AddApplication()
-    .AddInfrastructure();
+    .AddInfrastructure(builder.Configuration);
 
 builder.Host.UseSerilog((context, configuration) =>
 {

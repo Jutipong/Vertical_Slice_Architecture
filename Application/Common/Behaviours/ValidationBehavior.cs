@@ -1,6 +1,7 @@
-﻿
-namespace Application.Abstractions.Behaviors;
-public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : ICommandBase
+﻿namespace Application.Common.Behaviours;
+
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IValidatorBase
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -19,12 +20,12 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         var errors = validationFailures
             .Where(validatorsResult => !validatorsResult.Result.IsValid)
             .SelectMany(validatorsResult => validatorsResult.Result.Errors)
-            .Select(failure => new Domain.Exceptions.ValidationError(failure.ErrorCode, failure.ErrorMessage))
+            .Select(failure => new Domain.Common.Exceptions.ValidationError(failure.ErrorCode, failure.ErrorMessage))
             .ToList();
 
         if (errors.Any())
         {
-            throw new Domain.Exceptions.ValidationException(errors);
+            throw new Domain.Common.Exceptions.ValidationException(errors);
         }
 
         var response = await next();
@@ -32,4 +33,3 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         return response;
     }
 }
-

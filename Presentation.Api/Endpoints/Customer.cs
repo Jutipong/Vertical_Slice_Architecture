@@ -1,5 +1,6 @@
-﻿using static Application.Customer.Commands.Create;
-using static Application.Customer.Queries.GetById;
+﻿
+using Application.Customer.Commands;
+using Application.Customer.Queries;
 
 namespace Api.Endpoints;
 

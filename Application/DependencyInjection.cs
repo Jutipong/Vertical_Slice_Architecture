@@ -1,5 +1,4 @@
-﻿using Application.Abstractions.Behaviors;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
 public static class DependencyInjection
