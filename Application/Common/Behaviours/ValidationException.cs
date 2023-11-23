@@ -1,4 +1,4 @@
-﻿namespace Domain.Common.Exceptions;
+﻿namespace Application.Common.Behaviours;
 public class ValidationException : Exception
 {
     public ValidationException(IReadOnlyCollection<ValidationError> errors) : base("Validation failed")
