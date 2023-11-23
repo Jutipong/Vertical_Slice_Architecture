@@ -1,6 +1,50 @@
 {
     "cSpell.words": [
         "Dtos",
+        "Mediat",
         "Serilog"
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        "**/node_modules": true,
+        "Application/obj": true,
+        "Application/bin": true,
+        "Domain/bin": true,
+        "Domain/obj": true,
+        "Infrastructure/bin": true,
+        "Infrastructure/obj": true,
+        "Presentation/bin/Debug/net7.0": true,
+        "Presentation/bin/Debug/net7.0/Presentation.deps.json": true,
+        "Presentation/bin/Debug/net7.0/Presentation.dll": true,
+        "Presentation/bin/Debug/net7.0/Presentation.pdb": true,
+        "Presentation/obj": true,
+        "Presentation/bin": true,
+        "Presentation.Api/bin": true,
+        "Presentation.Api/obj": true,
+        "Presentation.Api.Report/bin": true,
+        "Presentation.Api.Report/obj": true
+    },
+    "hide-files.files": [
+        "Application/obj",
+        "Application/bin",
+        "Domain/bin",
+        "Domain/obj",
+        "Infrastructure/bin",
+        "Infrastructure/obj",
+        "Presentation/bin/Debug/net7.0",
+        "Presentation/bin/Debug/net7.0/Presentation.deps.json",
+        "Presentation/bin/Debug/net7.0/Presentation.dll",
+        "Presentation/bin/Debug/net7.0/Presentation.pdb",
+        "Presentation/obj",
+        "Presentation/bin",
+        "Presentation.Api/bin",
+        "Presentation.Api/obj",
+        "Presentation.Api.Report/bin",
+        "Presentation.Api.Report/obj"
     ]
 }
