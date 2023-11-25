@@ -22,7 +22,7 @@ public class Customer : CarterModule
             : Results.Ok(result.Value);
         });
 
-        app.MapPost("/GetById", async (ISender sender, CustomerGetByIdCommand req, CancellationToken cancellationToken) =>
+        app.MapPost("/GetById", async (ISender sender, CustomerGetByIdQueries req, CancellationToken cancellationToken) =>
         {
             var result = await sender.Send(req, cancellationToken);
 
