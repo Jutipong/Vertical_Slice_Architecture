@@ -2,15 +2,8 @@
 
 namespace Api.Extensions;
 
-public static partial class ServiceCollection
+public static class ServiceCollection
 {
-    public static WebApplicationBuilder AddSwagger(this WebApplicationBuilder builder)
-    {
-        builder.Services.AddSwagger();
-
-        return builder;
-    }
-
     public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();

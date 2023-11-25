@@ -13,7 +13,7 @@ var _config = config.GetSection(nameof(AppSettings)).Get<AppSettings>()!;
 builder.Services.AddSingleton(_config);
 
 var assembly = typeof(Program).Assembly;
-builder.AddSwagger();
+builder.Services.AddSwagger();
 builder.Services.AddCors();
 builder.Services.AddCarter();
 
