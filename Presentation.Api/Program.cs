@@ -17,9 +17,8 @@ builder.Services.AddSwagger();
 builder.Services.AddCors();
 builder.Services.AddCarter();
 
-builder.Services
-    .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Host.UseSerilog((context, configuration) =>
 {
