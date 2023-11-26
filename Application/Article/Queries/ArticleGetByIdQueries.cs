@@ -1,5 +1,8 @@
 ﻿namespace Application.Article.Queries;
 
-public class ArticleGetByIdQueries : Domain.Dtos.Article.GetById, IRequest<Result<Entities.Article>> { }
+public class ArticleGetByIdQueries : IRequest<Result<Entities.Article>>
+{
+    public Guid Id { get; set; }
+}
 
 public class ArticleGetByIdValidator { }
